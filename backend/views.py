@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User, Group
-from django.shortcuts import render
 from django.http import HttpResponse
 
-from rest_framework import viewsets, routers
+from rest_framework import viewsets
 from backend.serializers import UserSerializer, GroupSerializer
 
 from mysite import settings
 import os
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -24,6 +24,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 # View to return the static front-end code
+
+
 def index(request):
     try:
         with open(os.path.join(settings.REACT_APP_DIR, 'build', 'index.html')) as f:
