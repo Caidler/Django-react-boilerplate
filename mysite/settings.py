@@ -23,11 +23,18 @@ SECRET_KEY = '+ob9@xcz)xi=enyx87&(=m@ge)bfi(o=+z!b60wp*7relf9a(6'
 DEBUG = True
 
 AZURE_APPSERVICE_HOSTNAME = os.environ.get('APPSETTING_WEBSITE_SITE_NAME', '')
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", f"{AZURE_APPSERVICE_HOSTNAME}.azurewebsites.net"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost",
+                 f"{AZURE_APPSERVICE_HOSTNAME}.azurewebsites.net"]
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1
+REST_USE_JWT = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,6 +142,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 if 'AZURE_ACCOUNT_NAME' in os.environ:
     DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
     STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-    AZURE_ACCOUNT_NAME=os.environ['AZURE_ACCOUNT_NAME']
-    AZURE_ACCOUNT_KEY=os.environ['AZURE_ACCOUNT_KEY']
-    AZURE_CONTAINER=os.environ['AZURE_CONTAINER']
+    AZURE_ACCOUNT_NAME = os.environ['AZURE_ACCOUNT_NAME']
+    AZURE_ACCOUNT_KEY = os.environ['AZURE_ACCOUNT_KEY']
+    AZURE_CONTAINER = os.environ['AZURE_CONTAINER']
