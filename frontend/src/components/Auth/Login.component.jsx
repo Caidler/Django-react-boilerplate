@@ -5,9 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState;
+  const [password, setPassword] = useState;
+  const [email, setEmail] = useState;
 
   let handleSubmit = (e) => {
     e.preventDefault();

@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage/HomePage.component";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Header from "./components/Header/Header.component";
 
 function App() {
   // store users in a new variable
@@ -26,9 +27,10 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Header />
         <Switch>
-          <Route exact path="/" component={HomePage} />{" "}
-          <Route exact path="/login/" component={Login} />{" "}
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/login/" component={Login} />
         </Switch>
       </ThemeProvider>
     </div>
