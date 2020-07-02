@@ -35,10 +35,6 @@ export default function MenuAppBar(props) {
     setAnchorEl(null);
   };
 
-  // const switchDarkMode = () => {
-  //   console.log();
-  // };
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
