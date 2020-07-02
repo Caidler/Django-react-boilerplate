@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Login from "./components/Auth/Login.component";
@@ -12,22 +12,24 @@ import Header from "./components/Header/Header.component";
 function App() {
   // store users in a new variable
   axios.defaults.xsrfHeaderName = "X-CSRFToken";
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
+  const [darkState, setDarkState] = useState(
+    useMediaQuery("(prefers-color-scheme: dark)")
   );
+  const palletType = darkState ? "dark" : "light";
+  const darkTheme = createMuiTheme({
+    palette: {
+      type: palletType,
+    },
+  });
+  const handleThemeChange = () => {
+    setDarkState(!darkState);
+  };
 
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Header />
+        <Header DarkMode={handleThemeChange} />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login/" component={Login} />
