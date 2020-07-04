@@ -9,6 +9,8 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +39,7 @@ export default function MenuAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -50,7 +52,12 @@ export default function MenuAppBar(props) {
           <Typography variant="h6" className={classes.title}>
             OOOOO MY SEKSI PAPI
           </Typography>
-          <Switch onChange={props.DarkMode} />
+          <FormControlLabel
+            value="start"
+            control={<Switch onChange={props.DarkMode} />}
+            label={<Brightness2Icon />}
+            labelPlacement="start"
+          />
           <div>
             <IconButton
               aria-label="account of current user"
@@ -76,8 +83,8 @@ export default function MenuAppBar(props) {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>My Profile</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
           </div>
         </Toolbar>
