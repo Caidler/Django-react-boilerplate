@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Login from "./components/Auth/Login.component";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.component";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header/Header.component";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.component";
 
 function App() {
   // store users in a new variable
@@ -31,8 +32,9 @@ function App() {
         <CssBaseline />
         <Header DarkMode={handleThemeChange} />
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <PrivateRoute exact path="/" component={HomePage} />
           <Route exact path="/login/" component={Login} />
+          <Redirect from="*" to="/" />
         </Switch>
       </ThemeProvider>
     </div>
