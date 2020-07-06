@@ -1,4 +1,6 @@
 import { authHeader } from "../_helpers";
+// import axios from "axios";
+import csrfToken from "../_helpers/getToken";
 
 export const userService = {
   login,
@@ -13,11 +15,11 @@ export const userService = {
 function login(username, password) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": csrfToken },
     body: JSON.stringify({ username, password }),
   };
 
-  return fetch(`/users/authenticate`, requestOptions)
+  return fetch(`http://localhost:8000/accounts/login/`, requestOptions)
     .then(handleResponse)
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -83,7 +85,7 @@ function _delete(id) {
 function handleResponse(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
-    if (!response.ok) {
+    if (!response.statusText === "OK") {
       if (response.status === 401) {
         // auto logout if 401 response returned from api
         logout();

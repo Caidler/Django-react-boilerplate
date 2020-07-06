@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import Login from "./components/Auth/Login.component";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.component";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header/Header.component";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute.component";
+import { useSelector } from "react-redux";
+import { history } from "./components/_helpers";
 
 function App() {
   // store users in a new variable
@@ -25,17 +27,23 @@ function App() {
   const handleThemeChange = () => {
     setDarkState(!darkState);
   };
+  const alert = useSelector((state) => state.alert);
 
   return (
     <div className="App">
+      {alert.message && (
+        <div className={`alert ${alert.type}`}>{alert.message}</div>
+      )}
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Header DarkMode={handleThemeChange} />
-        <Switch>
-          <PrivateRoute exact path="/" component={HomePage} />
-          <Route exact path="/login/" component={Login} />
-          <Redirect from="*" to="/" />
-        </Switch>
+        <Router history={history}>
+          <Switch>
+            <PrivateRoute exact path="/" component={HomePage} />
+            <Route exact path="/login/" component={Login} />
+            <Redirect from="*" to="/" />
+          </Switch>
+        </Router>
       </ThemeProvider>
     </div>
   );

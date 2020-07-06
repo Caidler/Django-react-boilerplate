@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -18,11 +18,6 @@ export default function Login() {
   const loggingIn = useSelector((state) => state.authentication.loggingIn);
   const dispatch = useDispatch();
 
-  // reset login status
-  useEffect(() => {
-    dispatch(userActions.logout());
-  }, []);
-
   function handleChange(e) {
     const { name, value } = e.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
@@ -30,6 +25,9 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (username && password) {
+      dispatch(userActions.login(username, password));
+    }
   }
 
   const useStyles = makeStyles((theme) => ({
@@ -45,6 +43,7 @@ export default function Login() {
     <div className="from-wrapper">
       <form className={classes.root} onSubmit={handleSubmit}>
         <TextField
+          name="username"
           id="username"
           label="username"
           variant="outlined"
@@ -54,6 +53,7 @@ export default function Login() {
           type="text"
         />
         <TextField
+          name="email"
           id="email"
           label="email"
           variant="outlined"
@@ -62,6 +62,7 @@ export default function Login() {
           type="text"
         />
         <TextField
+          name="password"
           id="password"
           label="password"
           variant="outlined"

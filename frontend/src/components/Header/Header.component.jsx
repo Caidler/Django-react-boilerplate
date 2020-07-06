@@ -11,6 +11,8 @@ import Menu from "@material-ui/core/Menu";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
+import { useDispatch } from "react-redux";
+import { userActions } from "../_actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,9 +30,14 @@ export default function MenuAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleLogout = () => {
+    dispatch(userActions.logout());
   };
 
   const handleClose = () => {
@@ -84,7 +91,7 @@ export default function MenuAppBar(props) {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>My Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
         </Toolbar>
