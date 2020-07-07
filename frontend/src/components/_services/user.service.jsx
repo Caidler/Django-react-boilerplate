@@ -24,7 +24,6 @@ function login(username, password) {
     .then((user) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem("user", JSON.stringify(user));
-
       return user;
     });
 }
@@ -85,7 +84,7 @@ function _delete(id) {
 function handleResponse(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
-    if (!response.statusText === "OK") {
+    if (!(response.statusText === "OK")) {
       if (response.status === 401) {
         // auto logout if 401 response returned from api
         logout();
@@ -94,7 +93,6 @@ function handleResponse(response) {
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
-
     return data;
   });
 }
