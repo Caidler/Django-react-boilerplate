@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import axios from "axios";
 import Login from "./components/Auth/Login.component";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage.component";
@@ -14,7 +13,6 @@ import { history } from "./components/_helpers";
 
 function App() {
   // store users in a new variable
-  axios.defaults.xsrfHeaderName = "X-CSRFToken";
   const [darkState, setDarkState] = useState(
     useMediaQuery("(prefers-color-scheme: dark)")
   );
@@ -36,7 +34,7 @@ function App() {
       )}
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Header DarkMode={handleThemeChange} />
+        <Header DarkMode={handleThemeChange} isLoggedIn={true} />
         <Router history={history}>
           <Switch>
             <PrivateRoute exact path="/" component={HomePage} />

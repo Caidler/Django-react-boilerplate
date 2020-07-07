@@ -13,7 +13,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import { useDispatch } from "react-redux";
 import { userActions } from "../_actions";
-import { isLoggedIn } from "../_helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +31,7 @@ export default function MenuAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
-  const loggedIn = isLoggedIn;
+  let loggedIn = props.isLoggedIn;
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
