@@ -13,6 +13,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import { useDispatch } from "react-redux";
 import { userActions } from "../_actions";
+import { isLoggedIn } from "../_helpers";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,7 @@ export default function MenuAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
+  const loggedIn = isLoggedIn;
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,6 +40,7 @@ export default function MenuAppBar(props) {
 
   const handleLogout = () => {
     dispatch(userActions.logout());
+    setAnchorEl(null);
   };
 
   const handleClose = () => {
@@ -66,15 +69,17 @@ export default function MenuAppBar(props) {
             labelPlacement="start"
           />
           <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            { loggedIn && 
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            }
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -92,7 +97,7 @@ export default function MenuAppBar(props) {
             >
               <MenuItem onClick={handleClose}>My Profile</MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </Menu>
+            </Menu> 
           </div>
         </Toolbar>
       </AppBar>
