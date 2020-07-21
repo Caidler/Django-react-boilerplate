@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./HomePage.styles.css";
 
 export default function HomePage() {
   const [users, setUsers] = useState([]);

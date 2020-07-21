@@ -14,7 +14,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/actions/";
 import { withRouter } from "react-router-dom";
-import DefaultSnackbar from "../Snackbar/Snackbar.component";
+import DefaultSnackbar from "../Snackbar/SnackBar.component";
+import "./Header.styles.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
