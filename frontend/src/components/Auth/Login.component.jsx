@@ -41,6 +41,7 @@ function LoginForm(props) {
     <div className="from-wrapper">
       <form className={classes.root} onSubmit={handleSubmit}>
         <TextField
+          className="username-field"
           id="username"
           label="username"
           variant="outlined"
@@ -50,6 +51,7 @@ function LoginForm(props) {
           type="text"
         />
         <TextField
+          className="email-field"
           id="email"
           label="email"
           variant="outlined"
@@ -58,6 +60,7 @@ function LoginForm(props) {
           type="text"
         />
         <TextField
+          className="password-field"
           id="password"
           label="password"
           variant="outlined"
@@ -67,6 +70,7 @@ function LoginForm(props) {
           type="password"
         />
         <Button
+          className="submit-button"
           variant="contained"
           color="primary"
           type="submit"

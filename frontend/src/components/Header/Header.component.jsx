@@ -49,8 +49,8 @@ function MenuAppBar(props) {
   const handleLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
-    dispatch(alert.alertNormal("Wylogowano", 2));
     props.history.push("/");
+    dispatch(alert.alertNormal("Wylogowano", 2));
   };
 
   // const switchDarkMode = () => {
