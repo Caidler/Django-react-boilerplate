@@ -35,6 +35,7 @@ function App() {
           <Redirect from="*" to="/" />
         </Switch>
       </ThemeProvider>
+      {/* footer place. */}
     </div>
   );
 }

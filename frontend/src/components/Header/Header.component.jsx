@@ -4,7 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -13,9 +12,11 @@ import Brightness2Icon from "@material-ui/icons/Brightness2";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/actions/";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import DefaultSnackbar from "../Snackbar/SnackBar.component";
 import "./Header.styles.css";
+import Logo from "../../assets/logo.svg";
+import { alert } from "../../store/actions/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +49,7 @@ function MenuAppBar(props) {
   const handleLogout = () => {
     setAnchorEl(null);
     dispatch(logout());
+    dispatch(alert.alertNormal("Wylogowano", 2));
     props.history.push("/");
   };
 
@@ -57,16 +59,18 @@ function MenuAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="transparent" elevation={0}>
+      <AppBar
+        className="appbar-container"
+        position="static"
+        color="transparent"
+        elevation={0}
+      >
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
+          <Link className="logo-container" to="/">
+            <div className="logo">
+              <img src={Logo} alt="Logo" />
+            </div>
+          </Link>
           <Typography variant="h6" className={classes.title}>
             OOOOO MY SEKSI PAPI
           </Typography>
@@ -84,11 +88,12 @@ function MenuAppBar(props) {
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
+                className="menu-appbar-icon-container"
               >
-                <AccountCircle />
+                <AccountCircle className="menu-appbar-icon" />
               </IconButton>
               <Menu
-                id="menu-appbar"
+                className="profile-menu"
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: "top",
@@ -102,8 +107,15 @@ function MenuAppBar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>My Profile</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem className="my-profile-menu" onClick={handleClose}>
+                  My Profile
+                </MenuItem>
+                <MenuItem
+                  className="logout-profile-menu"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </MenuItem>
               </Menu>
             </React.Fragment>
           )}

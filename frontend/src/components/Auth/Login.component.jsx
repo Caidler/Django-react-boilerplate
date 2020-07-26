@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "../../store/actions/";
 import { withRouter } from "react-router-dom";
-import { alert } from "../../store/actions/";
 import "./Login.styles.css";
 
 function LoginForm(props) {
@@ -19,7 +18,6 @@ function LoginForm(props) {
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(authLogin(username, password));
-    dispatch(alert.alertNormal("Zalogowano", 2));
     props.history.push("/");
   };
 
