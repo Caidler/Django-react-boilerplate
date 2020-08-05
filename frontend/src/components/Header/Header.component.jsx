@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -14,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/actions/";
 import { withRouter, Link } from "react-router-dom";
 import DefaultSnackbar from "../Snackbar/SnackBar.component";
-import "./Header.styles.css";
+import "./Header.styles.scss";
 import Logo from "../../assets/logo.svg";
 import { alert } from "../../store/actions/";
 
@@ -79,7 +80,15 @@ function MenuAppBar(props) {
             control={<Switch onChange={props.DarkMode} />}
             label={<Brightness2Icon />}
             labelPlacement="start"
+            id="dark-mode-switch"
           />
+          {!authenticated && (
+            <Link className="logo-container" to="/login">
+              <Button variant="contained" color="primary">
+                Sign In
+              </Button>
+            </Link>
+          )}
           {authenticated && (
             <React.Fragment>
               <IconButton
