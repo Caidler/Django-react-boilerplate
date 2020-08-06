@@ -8,6 +8,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header/Header.component";
+import Copyright from "./components/Copyright/Copyright.component";
 
 function App() {
   axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -35,6 +36,7 @@ function App() {
           <Redirect from="*" to="/" />
         </Switch>
       </ThemeProvider>
+      <Copyright />
     </div>
   );
 }
