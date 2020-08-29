@@ -1,6 +1,9 @@
-import axios from "axios";
 import * as actionTypes from "./action.types";
-import { alert } from "./alert.actions";
+
+import {
+  alert
+} from "./alert.actions";
+import axios from "axios";
 
 export const authStart = () => {
   return {
@@ -54,9 +57,9 @@ export const authLogin = (username, password) => {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(alert.alertNormal("Zalogowano", 2));
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600));
+        dispatch(alert.alertNormal("Zalogowano", 2));
       })
       .catch((err) => {
         dispatch(authFail(err));
@@ -82,9 +85,9 @@ export const authSignup = (username, email, password1, password2) => {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(alert.alertNormal("Utworzono konto " + username, 2));
         dispatch(authSuccess(token));
         dispatch(checkAuthTimeout(3600));
+        dispatch(alert.alertNormal("Utworzono konto " + username, 2));
       })
       .catch((err) => {
         dispatch(authFail(err));

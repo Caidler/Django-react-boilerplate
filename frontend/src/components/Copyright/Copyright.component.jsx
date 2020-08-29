@@ -1,17 +1,20 @@
-import React from "react";
 import "./Copyright.styles.scss";
-import Typography from "@material-ui/core/Typography";
+
 import Link from "@material-ui/core/Link";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
 
 export default function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        Caidler
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <div className="App-Copyright">
+      <Typography color="textSecondary">
+        {"Delivered with 💚 by "}
+        <Link color="blue" href="https://github.com/Caidler/">
+          Caidler
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </div>
   );
 }

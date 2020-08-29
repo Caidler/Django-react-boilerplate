@@ -1,32 +1,31 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Switch from "@material-ui/core/Switch";
-import Brightness2Icon from "@material-ui/icons/Brightness2";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../store/actions/";
-import { withRouter, Link } from "react-router-dom";
-import DefaultSnackbar from "../Snackbar/SnackBar.component";
 import "./Header.styles.scss";
+
+import { Link, withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import AppBar from "@material-ui/core/AppBar";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
+import Button from "@material-ui/core/Button";
+import DefaultSnackbar from "../Snackbar/Snackbar.component";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import IconButton from "@material-ui/core/IconButton";
 import Logo from "../../assets/logo.svg";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import React from "react";
+import Switch from "@material-ui/core/Switch";
+import Toolbar from "@material-ui/core/Toolbar";
 import { alert } from "../../store/actions/";
+import { logout } from "../../store/actions/";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
+  menuSwitch: {
     marginRight: theme.spacing(2),
-  },
-  title: {
     flexGrow: 1,
   },
 }));
@@ -72,10 +71,8 @@ function MenuAppBar(props) {
               <img src={Logo} alt="Logo" />
             </div>
           </Link>
-          <Typography variant="h6" className={classes.title}>
-            OOOOO MY SEKSI PAPI
-          </Typography>
           <FormControlLabel
+            className={classes.menuSwitch}
             value="start"
             control={<Switch onChange={props.DarkMode} />}
             label={<Brightness2Icon />}
@@ -97,6 +94,7 @@ function MenuAppBar(props) {
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
+                size="small"
                 className="menu-appbar-icon-container"
               >
                 <AccountCircle className="menu-appbar-icon" />

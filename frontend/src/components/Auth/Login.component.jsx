@@ -1,17 +1,24 @@
-import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Button from "@material-ui/core/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { authLogin } from "../../store/actions/";
-import { withRouter } from "react-router-dom";
 import "./Login.styles.css";
+
+import { Link, withRouter } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import { authLogin } from "../../store/actions/";
+import { makeStyles } from "@material-ui/core/styles";
 
 function LoginForm(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
 
@@ -22,67 +29,84 @@ function LoginForm(props) {
   };
 
   const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-        width: "25ch",
-      },
+    paper: {
+      marginTop: "16px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
-    buttonProgress: {
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      marginTop: -12,
-      marginLeft: -12,
+    avatar: {
+      margin: "8px",
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: "8px",
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
     },
   }));
   const classes = useStyles();
   return (
-    <div className="from-wrapper">
-      <form className={classes.root} onSubmit={handleSubmit}>
-        <TextField
-          className="username-field"
-          id="username"
-          label="username"
-          variant="outlined"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          type="text"
-        />
-        <TextField
-          className="email-field"
-          id="email"
-          label="email"
-          variant="outlined"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-        />
-        <TextField
-          className="password-field"
-          id="password"
-          label="password"
-          variant="outlined"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          type="password"
-        />
-        <Button
-          className="submit-button"
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={loading}
-        >
-          {loading && (
-            <CircularProgress size={24} className={classes.buttonProgress} />
-          )}
-          Login
-        </Button>
-      </form>
-    </div>
+    <Container component="main" maxWidth="xs">
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <form className={classes.form} onSubmit={handleSubmit}>
+          <TextField
+            className="username-field"
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address/Username"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            className="password-field"
+            id="password"
+            label="password"
+            variant="outlined"
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            fullWidth
+            type="password"
+          />
+          <Button
+            className={classes.submit}
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
+            disabled={loading}
+          >
+            {loading && (
+              <CircularProgress size={24} className={classes.buttonProgress} />
+            )}
+            Login
+          </Button>
+        </form>
+        <Grid container>
+          <Grid item>
+            <Link to="/register" variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
+      </div>
+    </Container>
   );
 }
 

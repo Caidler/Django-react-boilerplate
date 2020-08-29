@@ -1,9 +1,11 @@
+import "./SnackBar.styles.css";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import "./SnackBar.styles.css";
-import { useDispatch, useSelector } from "react-redux";
 import { alert } from "../../store/actions/";
 
 export default function DefaultSnackbar() {
@@ -13,7 +15,6 @@ export default function DefaultSnackbar() {
     if (reason === "clickaway") {
       return;
     }
-
     dispatch(alert.alertClear());
   };
 

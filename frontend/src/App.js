@@ -1,14 +1,17 @@
-import React, { useState } from "react";
 import "./App.css";
-import axios from "axios";
-import Login from "./components/Auth/Login.component";
-import { Switch, Route, Redirect } from "react-router-dom";
-import HomePage from "./components/HomePage/HomePage.component";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
+import React, { useState } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+
+import Copyright from "./components/Copyright/Copyright.component";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./components/Header/Header.component";
-import Copyright from "./components/Copyright/Copyright.component";
+import HomePage from "./components/HomePage/HomePage.component";
+import Login from "./components/Auth/Login.component";
+import Register from "./components/Auth/register.component";
+import axios from "axios";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 function App() {
   axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -29,13 +32,14 @@ function App() {
     <div className="App">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Header DarkMode={handleThemeChange} />
+        <Header DarkMode={handleThemeChange} />{" "}
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/login/" component={Login} />
+          <Route exact path="/" component={HomePage} />{" "}
+          <Route exact path="/login/" component={Login} />{" "}
+          <Route exact path="/register/" component={Register} />{" "}
           <Redirect from="*" to="/" />
-        </Switch>
-      </ThemeProvider>
+        </Switch>{" "}
+      </ThemeProvider>{" "}
       <Copyright />
     </div>
   );
