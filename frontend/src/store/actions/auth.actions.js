@@ -44,6 +44,7 @@ export const checkAuthTimeout = (expirationTime) => {
 
 export const authLogin = (username, password) => {
   return (dispatch) => {
+    dispatch(logout());
     dispatch(authStart());
     axios
       .post("http://127.0.0.1:8000/accounts/login/", {
@@ -70,6 +71,7 @@ export const authLogin = (username, password) => {
 
 export const authSignup = (username, email, password1, password2) => {
   return (dispatch) => {
+    dispatch(logout());
     dispatch(authStart());
     axios
       .post("http://127.0.0.1:8000/accounts/registration/", {

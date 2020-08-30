@@ -9,7 +9,7 @@ export default function Copyright() {
     <div className="App-Copyright">
       <Typography color="textSecondary">
         {"Delivered with 💚 by "}
-        <Link color="blue" href="https://github.com/Caidler/">
+        <Link color="initial" href="https://github.com/Caidler/">
           Caidler
         </Link>{" "}
         {new Date().getFullYear()}
