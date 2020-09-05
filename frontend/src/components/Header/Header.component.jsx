@@ -53,10 +53,6 @@ function MenuAppBar(props) {
     dispatch(alert.alertNormal("Wylogowano", 2));
   };
 
-  // const switchDarkMode = () => {
-  //   console.log();
-  // };
-
   return (
     <div className={classes.root}>
       <AppBar

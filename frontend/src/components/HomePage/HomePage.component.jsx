@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
 import "./HomePage.styles.css";
+
+import React, { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ export default function HomePage() {
     let fetchData = async () => {
       let response = await fetch("/api/users");
       let json = await response.json();
-      setUsers(json);
+      setUsers(json.results);
     };
     fetchData();
   }, []);

@@ -52,13 +52,15 @@ export const authLogin = (username, password) => {
         password: password,
       })
       .then((res) => {
-        const token = res.data.token;
+        const access_token = res.data.access_token;
+        const refresh_token = res.data.refresh_token;
         const user = res.data.user;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-        localStorage.setItem("token", token);
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(access_token));
         dispatch(checkAuthTimeout(3600));
         dispatch(alert.alertNormal("Zalogowano", 2));
       })
@@ -81,13 +83,15 @@ export const authSignup = (username, email, password1, password2) => {
         password2: password2,
       })
       .then((res) => {
-        const token = res.data.token;
+        const access_token = res.data.access_token;
+        const refresh_token = res.data.refresh_token;
         const user = res.data.user;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-        localStorage.setItem("token", token);
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("expirationDate", expirationDate);
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(access_token));
         dispatch(checkAuthTimeout(3600));
         dispatch(alert.alertNormal("Utworzono konto " + username, 2));
       })

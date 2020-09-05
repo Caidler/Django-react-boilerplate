@@ -27,14 +27,22 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost",
                  f"{AZURE_APPSERVICE_HOSTNAME}.azurewebsites.net"]
 # Application definition
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 30,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    )
+}
+
 INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
+    'dj_rest_auth',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
+    'dj_rest_auth.registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +53,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'JWT'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
